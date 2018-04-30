@@ -1,25 +1,13 @@
 import json
-import pickle
 from textblob import TextBlob
 from textblob.classifiers import NaiveBayesClassifier
-from textblob.classifiers import MaxEntClassifier
 
 class Classifier:
 
-  def __init__(self, train=True):
-    if train:
-      fp = open("./data/train.csv")
-      self.cl = NaiveBayesClassifier(fp, format="csv")
-      # self.cl = MaxEntClassifier(fp, format="csv")
-      fp.close()
-
-      # fp = open("./data/classifier.pickle", "wb")
-      # pickle.dump(self.cl, fp, -1)
-      # fp.close()
-    else:
-      fp = open("./data/classifier.pickle", "rb")
-      self.cl = pickle.load(fp)
-      fp.close()
+  def __init__(self):
+    fp = open("./data/train.csv")
+    self.cl = NaiveBayesClassifier(fp, format="csv")
+    fp.close()
 
   def test(self):
     return self.cl.classify("This is a test sentence")
@@ -44,7 +32,7 @@ class Classifier:
     return test_accuracy
 
 def main():
-  cl = Classifier(train=True)
+  cl = Classifier()
   print(cl.test())
 
 if __name__ == "__main__":

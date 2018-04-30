@@ -3,33 +3,39 @@ import sys
 TRAIN_N = 5000
 TEST_N = 1000
 
-def removeEntities(text):
+def cleanContent(content):
 
-  def clean(word):
-    if "@" in word: return "NAME"
-    elif "http:" in word: return "LINK"
-    elif "#" in word: return "HASHTAG"
-    else: return word
+  cleaned = content.replace('"', "")
+  cleaned = cleaned.replace('[', "")
+  cleaned = cleaned.replace(']', "")
+  cleaned = cleaned.replace(',', " ")
+  cleaned = cleaned.replace('\n', "")
+  cleaned = cleaned.lstrip()
+  cleaned = ' '.join(cleaned.split())
 
-  return ' '.join(map(clean, text.split()))
+  return cleaned
 
 class Data:
 
   def __init__(self, row):
 
-    split = row.split(",")
+    row = row.rstrip()
 
-    self.tweet_id = split[0]
-    self.sentiment = split[1].replace('"', '')
-    self.author = split[2].replace('"', '')
-    self.content = ' '.join(split[3:]).replace('"', '').replace("\n", "").lower()
-    self.content = removeEntities(self.content)
+    self.sentiment = ""
+    self.content = ""
+
+    dashes = 0
+    for c in row:
+      if c == "-": dashes += 1
+      elif dashes >= 3 and dashes < 6: self.sentiment += c
+      elif dashes >= 6: self.content += c
+
+    self.content = cleanContent(self.content)
 
   def write(self, fp):
     fp.write(self.content + "," + self.sentiment + "\n")
 
-dirty = open("./data/text_emotion.csv")
-next(dirty)
+dirty = open("./data/isear.txt")
 train = open("./data/train.csv", "w")
 test = open("./data/test.csv", "w")
 

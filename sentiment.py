@@ -2,7 +2,7 @@ import classifier
 from flask import Flask
 from flask import request
 
-cl = classifier.Classifier(train=True)
+cl = classifier.Classifier()
 
 app = Flask(__name__)
 
