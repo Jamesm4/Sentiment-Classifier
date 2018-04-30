@@ -21,3 +21,8 @@ def sentiments():
 @app.route("/accuracy")
 def accuracy():
   return str(round(cl.accuracy(), 3))
+
+@app.route("/labels")
+def labels():
+  return cl.labels()
+

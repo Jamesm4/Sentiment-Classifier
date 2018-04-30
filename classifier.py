@@ -31,6 +31,9 @@ class Classifier:
     fp.close()
     return test_accuracy
 
+  def labels(self):
+    return json.dumps({"labels": self.cl.labels()})
+
 def main():
   cl = Classifier()
   print(cl.test())
