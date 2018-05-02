@@ -1,7 +1,9 @@
 import classifier
 from flask import Flask
 from flask import request
+from werkzeug.contrib.cache import SimpleCache
 
+cache = SimpleCache()
 cl = classifier.Classifier()
 
 app = Flask(__name__)
@@ -20,7 +22,11 @@ def sentiments():
 
 @app.route("/accuracy")
 def accuracy():
-  return str(round(cl.accuracy(), 3))
+  acc = cache.get("accuracy")
+  if acc is None:
+    acc = str(round(cl.accuracy(), 3))
+    cache.set("accuracy", acc)
+  return acc
 
 @app.route("/labels")
 def labels():
