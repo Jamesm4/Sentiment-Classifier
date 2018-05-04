@@ -26,10 +26,14 @@ class Classifier:
     return json.dumps(probs)
 
   def accuracy(self):
+
+    fp = open('./data/train.csv')
+    train_accuracy = self.cl.accuracy(fp, format="csv")
+    fp.close()
     fp = open('./data/test.csv')
     test_accuracy = self.cl.accuracy(fp, format="csv")
     fp.close()
-    return test_accuracy
+    return json.dumps({"train_accuracy": train_accuracy, "test_accuracy": test_accuracy})
 
   def labels(self):
     return json.dumps({"labels": self.cl.labels()})

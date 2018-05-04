@@ -24,7 +24,7 @@ def sentiments():
 def accuracy():
   acc = cache.get("accuracy")
   if acc is None:
-    acc = str(round(cl.accuracy(), 3))
+    acc = cl.accuracy()
     cache.set("accuracy", acc)
   return acc
 
