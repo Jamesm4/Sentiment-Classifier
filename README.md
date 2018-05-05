@@ -9,7 +9,7 @@ There are seven possible emotions: guilt, anger, sadness, joy, shame, fear, and 
 | Train | 83.46% |
 | Test | 51% |
 
-* Note: Windows users should change `python3` to `python` in `sentiment.py`
+* Note: Windows users should change `python3` to `python` in `start.sh`
 
 ## Requirements
 - [Python 3.6](https://www.python.org/)
@@ -21,7 +21,7 @@ There are seven possible emotions: guilt, anger, sadness, joy, shame, fear, and 
 - Create the train and test files (already done): `python clean.py`
 - Test the classifier without running the server `python classifier.py`
 - Start the server `python sentiment.py`
-- Interactively classify sentences `python interactive.py`
+- Interactively classify sentences `./start.sh`
 
 ## API Routes
 
