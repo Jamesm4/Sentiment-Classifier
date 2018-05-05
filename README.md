@@ -20,8 +20,8 @@ There are seven possible emotions: guilt, anger, sadness, joy, shame, fear, and 
 
 - Create the train and test files (already done): `python clean.py`
 - Test the classifier without running the server `python classifier.py`
-- Start the server `python sentiment.py`
-- Interactively classify sentences `./start.sh`
+- Start the server `./start.sh`
+- Interactively classify sentences `python interactive.py`
 
 ## API Routes
 
